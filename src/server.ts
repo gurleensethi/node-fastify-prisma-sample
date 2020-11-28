@@ -1,13 +1,15 @@
 import fastify from "fastify";
+import { registerRoutes } from "./routes";
+import { injectServices } from "./services";
 
-const server = fastify();
+(async () => {
+  const server = fastify({ logger: process.env.NODE_ENV === "development" });
 
-server.get("/ping", async (request, reply) => {
-  return "pong\n";
-});
+  await injectServices(server);
+  await registerRoutes(server, { prefix: "/api/v1" });
 
-server.listen(8080, (err, address) => {
-  if (err) return console.error(err);
-
-  console.log(`Server listening on ${address}`);
-});
+  server.listen(8080, (err, address) => {
+    if (err) return console.error(err);
+    console.log(`Server listening on ${address}`);
+  });
+})();

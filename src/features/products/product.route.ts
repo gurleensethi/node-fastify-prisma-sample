@@ -1,5 +1,5 @@
 import { FastifyPluginAsync } from "fastify";
-import schemas from "../common/validation/schemas";
+import productSchemas from "./product.schema";
 
 const ProductRoute: FastifyPluginAsync = async (fastify, options) => {
   fastify.get("/products", {}, async (request, reply) => {
@@ -17,8 +17,8 @@ const ProductRoute: FastifyPluginAsync = async (fastify, options) => {
           },
         },
         response: {
-          200: schemas.productItemSchema,
-          404: { $ref: "product" },
+          200: productSchemas.productItemSchema,
+          404: { $ref: "notFound" },
         },
       },
     },

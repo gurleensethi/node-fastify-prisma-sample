@@ -1,6 +1,6 @@
 import fastify from "fastify";
 import { initSchemas } from "./common/validation/schemas";
-import { registerRoutes } from "./routes";
+import { registerRoutes } from "./features";
 import { injectServices } from "./services";
 
 async function bootstrap() {

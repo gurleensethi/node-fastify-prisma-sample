@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
-import ProductRoute from "./product.route";
+import ProductRoute from "./products/product.route";
 
 const routes: FastifyPluginAsync[] = [ProductRoute];
 

@@ -8,6 +8,14 @@ const productSchemas = {
     },
     required: ["id", "name", "description"],
   },
+  productCreateBody: {
+    type: "object",
+    properties: {
+      name: { type: "string" },
+      description: { type: "string" },
+    },
+    required: ["name", "description"],
+  },
 };
 
 export default productSchemas;

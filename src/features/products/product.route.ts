@@ -1,4 +1,5 @@
 import { FastifyPluginAsync } from "fastify";
+import { CreateProductData } from "../../services/products-service";
 import productSchemas from "./product.schema";
 
 const ProductRoute: FastifyPluginAsync = async (fastify, options) => {
@@ -32,6 +33,23 @@ const ProductRoute: FastifyPluginAsync = async (fastify, options) => {
         reply.statusCode = 404;
         return { message: `Product with id ${productId} not found!` };
       }
+
+      return product;
+    }
+  );
+
+  fastify.post<{ Body: CreateProductData }>(
+    "/products",
+    {
+      schema: {
+        body: productSchemas.productCreateBody,
+      },
+    },
+    (request, reply) => {
+      const { productsService } = fastify.services;
+      const { body } = request;
+
+      const product = productsService.create(body);
 
       return product;
     }

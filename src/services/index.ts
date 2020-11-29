@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import ProductsService from "./ProductsService";
+import ProductsService from "./products-service";
 
 export interface AppServices {
   productsService: ProductsService;

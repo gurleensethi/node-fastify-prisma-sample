@@ -1,4 +1,6 @@
-const productSchemas = {
+import { JSONSchema6 } from "json-schema";
+
+const productSchemas: { [key: string]: JSONSchema6 } = {
   productItemSchema: {
     type: "object",
     properties: {

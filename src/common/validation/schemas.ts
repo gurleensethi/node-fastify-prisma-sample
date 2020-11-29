@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
+import { JSONSchema6 } from "json-schema";
 
-const schemas = {
+const schemas: Record<string | number, JSONSchema6> = {
   notFound: {
     type: "object",
     properties: {

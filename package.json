@@ -1,5 +1,5 @@
 {
-  "name": "products-fp",
+  "name": "node-fastify-prisma-sample",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

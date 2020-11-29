@@ -18,7 +18,7 @@ const ProductRoute: FastifyPluginAsync = async (fastify, options) => {
         },
         response: {
           200: schemas.productItemSchema,
-          404: schemas.notFound,
+          404: { $ref: "product" },
         },
       },
     },

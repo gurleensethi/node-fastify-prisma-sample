@@ -1,4 +1,6 @@
-export default {
+import { FastifyInstance } from "fastify";
+
+const schemas = {
   notFound: {
     type: "object",
     properties: {
@@ -16,3 +18,12 @@ export default {
     required: ["id", "name", "description"],
   },
 };
+
+export default schemas;
+
+export async function initSchemas(fastify: FastifyInstance) {
+  fastify.addSchema({
+    $id: "product",
+    ...schemas.productItemSchema,
+  });
+}

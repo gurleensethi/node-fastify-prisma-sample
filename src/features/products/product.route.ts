@@ -1,5 +1,4 @@
 import { FastifyPluginAsync } from "fastify";
-import { REPL_MODE_SLOPPY } from "repl";
 import {
   CreateProductData,
   UpdateProductData,

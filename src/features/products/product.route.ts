@@ -10,7 +10,7 @@ const ProductRoute: FastifyPluginAsync = async (fastify, options) => {
     return fastify.services.productsService.find();
   });
 
-  fastify.get<{ Params: { productId: number } }>(
+  fastify.get<{ Params: { productId: string } }>(
     "/products/:productId",
     {
       schema: {
@@ -51,7 +51,7 @@ const ProductRoute: FastifyPluginAsync = async (fastify, options) => {
     }
   );
 
-  fastify.put<{ Body: UpdateProductData; Params: { productId: number } }>(
+  fastify.put<{ Body: UpdateProductData; Params: { productId: string } }>(
     "/products/:productId",
     {
       schema: {
@@ -79,7 +79,7 @@ const ProductRoute: FastifyPluginAsync = async (fastify, options) => {
     }
   );
 
-  fastify.delete<{ Params: { productId: number } }>(
+  fastify.delete<{ Params: { productId: string } }>(
     "/products/:productId",
     {
       schema: {

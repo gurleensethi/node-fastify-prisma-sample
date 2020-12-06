@@ -1,46 +1,49 @@
-export interface Product {
-  id: number;
-  name: string;
-  description: string;
-}
+import { PrismaClient, Product } from "@prisma/client";
+import { v4 } from "uuid";
 
 export type CreateProductData = Omit<Product, "id">;
 export type UpdateProductData = Omit<Product, "id">;
 
 export default class ProductsService {
-  private idCounter = 2;
-  private products: Product[] = [
-    { id: 1, name: "T-Shirt", description: "Sample small t-shirt." },
-  ];
+  constructor(private prisma: PrismaClient) {}
 
   async find(): Promise<Product[]> {
-    return this.products;
+    return this.prisma.product.findMany();
   }
 
-  async findById(id: number): Promise<Product | undefined> {
-    return this.products.find((product) => product.id === id);
+  async findById(id: string): Promise<Product | null> {
+    return this.prisma.product.findFirst({ where: { id } });
   }
 
   async create(data: CreateProductData): Promise<Product> {
-    const product: Product = { id: this.idCounter++, ...data };
-    this.products.push(product);
-    return product;
+    return this.prisma.product.create({
+      data: {
+        id: v4(),
+        ...data,
+      },
+    });
   }
 
-  async update(
-    id: number,
-    data: UpdateProductData
-  ): Promise<Product | undefined> {
-    const index = this.products.findIndex((product) => product.id === id);
-    if (index == -1) return undefined;
-    const product = this.products[index];
-    this.products[index] = { ...product, ...data };
-    return this.products[index];
+  async update(id: string, data: UpdateProductData): Promise<Product | null> {
+    const product = await this.prisma.product.findFirst({ where: { id } });
+
+    if (!product) {
+      return null;
+    }
+
+    return this.prisma.product.update({
+      data: { ...data },
+      where: { id },
+    });
   }
 
-  async delete(id: number): Promise<Product | undefined> {
-    const index = this.products.findIndex((product) => product.id === id);
-    if (index == -1) return undefined;
-    return this.products.splice(index)[0];
+  async delete(id: string): Promise<Product | null> {
+    const product = await this.prisma.product.findFirst({ where: { id } });
+
+    if (!product) {
+      return null;
+    }
+
+    return this.prisma.product.delete({ where: { id } });
   }
 }

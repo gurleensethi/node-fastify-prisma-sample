@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
     "develop": "NODE_ENV=development tsc-watch --onSuccess \"npm start\"",
     "docker:setup": "docker-compose -f docker/dev.docker-compose.yaml up -d",
     "docker:teardown": "docker-compose -f docker/dev.docker-compose.yaml down"
@@ -12,14 +12,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/cli": "^2.12.1",
+    "@prisma/client": "^2.12.1",
+    "@types/uuid": "^8.3.0",
     "dotenv": "^8.2.0",
     "fastify": "^3.8.0",
     "fastify-plugin": "^3.0.0",
     "knex": "^0.21.12",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
+    "@prisma/cli": "^2.12.1",
     "@types/json-schema": "^7.0.6",
     "@types/node": "^14.14.10",
     "ts-node": "^9.1.0",

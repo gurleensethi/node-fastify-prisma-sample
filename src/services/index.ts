@@ -1,3 +1,4 @@
+import { PrismaClient } from "@prisma/client";
 import { FastifyInstance } from "fastify";
 import ProductsService from "./products-service";
 
@@ -6,7 +7,9 @@ export interface AppServices {
 }
 
 export async function injectServices(fastify: FastifyInstance) {
-  const productsService = new ProductsService();
+  const prismaClient = new PrismaClient();
+
+  const productsService = new ProductsService(prismaClient);
 
   const services: AppServices = {
     productsService,

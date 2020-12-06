@@ -14,6 +14,16 @@ async function bootstrap() {
     if (err) return console.error(err);
     console.log(`Server listening on ${address}`);
   });
+
+  server.setErrorHandler(async function (error, request, reply) {
+    console.error(error);
+    reply.statusCode = 500;
+    return {
+      statusCode: 500,
+      error: "Internal Server Error",
+      message: error.message,
+    };
+  });
 }
 
 bootstrap();

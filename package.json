@@ -6,12 +6,15 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "develop": "NODE_ENV=development tsc-watch --onSuccess \"npm start\""
+    "develop": "NODE_ENV=development tsc-watch --onSuccess \"npm start\"",
+    "docker:setup": "docker-compose -f docker/dev.docker-compose.yaml up -d",
+    "docker:teardown": "docker-compose -f docker/dev.docker-compose.yaml down"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/cli": "^2.12.1",
     "fastify": "^3.8.0",
     "fastify-plugin": "^3.0.0"
   },

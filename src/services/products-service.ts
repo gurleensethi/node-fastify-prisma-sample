@@ -20,6 +20,7 @@ export default class ProductsService {
       data: {
         id: v4(),
         ...data,
+        user: { connect: { id: "testing" } },
       },
     });
   }

@@ -1,7 +1,8 @@
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
-import ProductRoute from "./products/product.route";
+import productRoutes from "./products/product.routes";
+import authRoutes from "./auth/auth.routes";
 
-const routes: FastifyPluginAsync[] = [ProductRoute];
+const routes: FastifyPluginAsync[] = [productRoutes, authRoutes];
 
 export async function registerRoutes(
   fastify: FastifyInstance,

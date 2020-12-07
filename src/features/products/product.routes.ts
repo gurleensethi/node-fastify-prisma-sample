@@ -5,7 +5,7 @@ import {
 } from "../../services/products-service";
 import productSchemas from "./product.schema";
 
-const ProductRoute: FastifyPluginAsync = async (fastify, options) => {
+const productRoutes: FastifyPluginAsync = async (fastify, options) => {
   fastify.get("/products", {}, async (request, reply) => {
     return fastify.services.productsService.find();
   });
@@ -106,4 +106,4 @@ const ProductRoute: FastifyPluginAsync = async (fastify, options) => {
   );
 };
 
-export default ProductRoute;
+export default productRoutes;

@@ -24,6 +24,20 @@ model Product {
   name        String
   description String?
   price       Float
+  userId      String  @map("user_id")
+  user        User    @relation("productsTousers", fields: [userId], references: [id])
 
   @@map("products")
+}
+
+model User {
+  id        String    @id
+  firstName String    @map("first_name")
+  lastName  String    @map("last_name")
+  email     String    @unique
+  password  String
+  createdAt DateTime? @default(now()) @map("created_at")
+  products  Product[] @relation("productsTousers")
+
+  @@map("users")
 }

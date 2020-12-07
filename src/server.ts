@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import { initSchemas } from "./common/validation/schemas";
+import { BaseHttpError } from "./errors/http-errors";
 import { registerRoutes } from "./features";
 import { injectServices } from "./services";
 
@@ -17,7 +18,18 @@ async function bootstrap() {
 
   server.setErrorHandler(async function (error, request, reply) {
     console.error(error);
+
+    if (error instanceof BaseHttpError) {
+      reply.statusCode = error.statusCode;
+
+      return {
+        statusCode: error.statusCode,
+        message: error.message,
+      };
+    }
+
     reply.statusCode = 500;
+
     return {
       statusCode: 500,
       error: "Internal Server Error",
